@@ -10,4 +10,28 @@
   margin-right: 150px;
 }
 
+#icon-colum {
+  display: flex;
+  align-items: center;
+  width: 20px;
+}
+
+.icon-1 {
+  height: 30px;
+  width: 30px;
+  margin: auto;
+}
+
+.icon-2 {
+  height: 30px;
+  width: 30px;
+  margin: auto;
+  margin-left: 20px;
+}
+
+.trash {
+  height: 30px;
+  width: 30px;
+}
+
 /*# sourceMappingURL=main.css.map */
