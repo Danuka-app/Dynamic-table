@@ -2,8 +2,17 @@
   width: 400px;
 }
 
+.container1 {
+  font-family: "Oswald", sans-serif;
+}
+
 .top {
   height: 70px;
+}
+
+.topHeader p {
+  font-size: 30px;
+  font-family: "Roboto Slab", serif;
 }
 
 .table {
@@ -39,6 +48,119 @@
 
 .dip {
   display: none;
+}
+
+.header h2 {
+  font-size: 25px;
+}
+
+.header {
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 20px 40px;
+  text-align: center;
+}
+
+.header h2 {
+  margin: 0;
+}
+
+.form {
+  padding: 30px 40px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.form-group label {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  border: 2px solid #f0f0f0;
+  border-radius: 4px;
+  display: block;
+  font-size: 14px;
+  padding: 10px;
+  width: 100%;
+}
+
+.form-group i {
+  position: absolute;
+  top: 40px;
+  right: 10px;
+  visibility: hidden;
+}
+
+.form-group small {
+  visibility: hidden;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  /*visibility: hidden;*/
+}
+
+.form button {
+  background-color: #8e44ad;
+  border: 2px solid #8e44ad;
+  border-radius: 4px;
+  color: #fff;
+  display: block;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+}
+
+.form-group.success input {
+  border-color: #2ecc71;
+}
+
+.form-group.error input {
+  border-color: #e74c3c;
+}
+
+.form-group.success i.fa-check-circle {
+  visibility: visible;
+  color: #2ecc71;
+}
+
+.form-group.error i.fa-exclamation-circle {
+  visibility: visible;
+  color: #e74c3c;
+}
+
+.form-group.error small {
+  visibility: visible;
+  color: #e74c3c;
+}
+
+.idea {
+  height: 100px;
+  width: 50px;
+  background-color: #8e44ad;
+  display: block;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  opacity: 0.3;
+  color: white;
+  background-color: black;
+  align-items: center;
+  text-align: center;
+  display: block;
+}
+
+.footer p {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 18px;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -1,10 +1,89 @@
+var form = document.getElementById('form');
+var username = document.getElementById('name');
+var email = document.getElementById('email');
+var password = document.getElementById('password');
+var address = document.getElementById('address');
 
+//-----------------------------------------Validation
+var userNameValid = false;
+var emailValid = false;
+var addressVaild = false;
+var passwordValid = false;
+init();
+function init(){
+    username.autofocus;
+}
+function checkInput(){
+    var usernameValue = username.value.trim();
+    var emailValue = email.value.trim();
+    var passwordValue = password.value.trim();
+    var addressValue= address.value.trim();
+
+
+    if(usernameValue === '') {
+        setErrorFor(username, 'Username cannot be blank');
+    } else {
+        setSuccessFor(username);
+        userNameValid =true
+    }
+
+    if(addressValue === '') {
+        setErrorFor(address, 'address cannot be blank');
+    } else {
+        setSuccessFor(address);
+        addressVaild =true
+    }
+
+    if(emailValue === '') {
+        setErrorFor(email, 'Email cannot be blank');
+    } else if(!isEmail(emailValue)){
+        setErrorFor(email, 'not a valid email');
+    }else
+    {
+        setSuccessFor(email);
+        emailValid=true;
+    }
+
+    if(passwordValue === '') {
+        setErrorFor(password, 'password cannot be blank');
+    } else {
+        setSuccessFor(password);
+        passwordValid=true;
+    }
+
+}
+
+function setErrorFor(input, message){
+    const formControl = input.parentElement;
+    const small = formControl.querySelector('small');
+    formControl.className = 'form-group error';
+    small.innerText = message;
+}
+
+function setSuccessFor(input){
+    const formControl = input.parentElement;
+    formControl.className = 'form-group success';
+}
+
+function isEmail(email){
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+}
+//------------------------------------------------
 var changeIcon =`<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check-circle-fill trash delete" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   <path class="delete" fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
 </svg>`
 
 var submit = document.getElementById('submit');
-submit.addEventListener('click',addMembers);
+
+submit.addEventListener('click',function (event){
+    checkInput();
+    event.preventDefault();
+    if(userNameValid && emailValid && addressVaild && passwordValid){
+       addMembers();
+    }else {
+        alert(3232);
+    }
+});
 var selectedRow = null
 
 var srNo =0;
@@ -79,8 +158,7 @@ function data(){
     formData.address = document.getElementById('address').value;
     return formData;
 }
-function addMembers(event){
-    event.preventDefault();
+function addMembers(){
     if(selectedRow ==null){
         var table = document.querySelector('table');
         var newRow = table.insertRow(table.length);
@@ -92,9 +170,10 @@ function addMembers(event){
 
         cell1.innerHTML = srNo;
         cell2.innerHTML = data().fullName;
-        cell3.innerHTML = data().email;
-        cell4.innerHTML = data().address;
+        cell3.innerHTML = data().address;
+        cell4.innerHTML = data().email;
         cell5.innerHTML = html;
+        resetForm();
     }else {
         updateRecord(data())
         resetForm();
@@ -107,6 +186,7 @@ function resetForm(){
     document.getElementById("name").value = "";
     document.getElementById("email").value = "";
     document.getElementById("address").value = "";
+    document.getElementById("password").value = "";
     selectedRow = null;
 }
 

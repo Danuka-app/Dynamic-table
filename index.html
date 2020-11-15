@@ -5,27 +5,48 @@
     <title>Dynamic-table</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Roboto+Slab:wght@900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/53a56f5ede.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="d-flex p-2 bd-highlight top bg-info">I'm a flexbox container!</div>
-    <div class="d-flex bd-highlight">
+    <div class="d-flex p-2 bd-highlight top bg-info topHeader">
+        <p>Wellcome to Poss</p>
+    </div>
+    <div class="d-flex bd-highlight container1">
         <div class="p-2 flex-shrink-1 bd-highlight colum-2">
-            <form>
+            <div class="header">
+                <h2>Enter Your Detail</h2>
+            </div>
+            <form class="form" id="form">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="CXXX">
+                    <input type="text" class="form-control" id="name" placeholder="CXXX" autofocus>
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error Message</small>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="text" class="form-control" id="email" placeholder="Danuka@gmail.com">
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error Message</small>
                 </div>
-                <div class="form-group">
+                <div class="form-group ">
                     <label for="password">Address</label>
                     <input type="text" class="form-control" id="password" placeholder="Galle">
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error Message</small>
                 </div>
-                <div class="form-group">
+                <div class="form-group ">
                     <label for="address">password</label>
                     <input type="password" class="form-control" id="address" placeholder="@wade34">
+                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-exclamation-circle"></i>
+                    <small>Error Message</small>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-lg" id="submit">Submit</button>
@@ -47,6 +68,9 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="d-flex p-2 bd-highlight top footer">
+        <p>Danuka@ngvnsjlansalkj</p>
     </div>
 <script src="js/main.js"></script>
 </body>
