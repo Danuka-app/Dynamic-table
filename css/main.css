@@ -13,7 +13,6 @@
 #icon-colum {
   display: flex;
   align-items: center;
-  width: 20px;
 }
 
 .icon-1 {
@@ -32,6 +31,14 @@
 .trash {
   height: 30px;
   width: 30px;
+}
+
+.btn {
+  background: none;
+}
+
+.dip {
+  display: none;
 }
 
 /*# sourceMappingURL=main.css.map */
