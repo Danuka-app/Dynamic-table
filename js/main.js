@@ -3,6 +3,9 @@ var username = document.getElementById('name');
 var email = document.getElementById('email');
 var password = document.getElementById('password');
 var address = document.getElementById('address');
+var tableFooter = document.getElementById('tableFooter');
+var visibleTable = document.getElementById('table');
+
 
 //-----------------------------------------Validation
 var userNameValid = false;
@@ -10,9 +13,15 @@ var emailValid = false;
 var addressVaild = false;
 var passwordValid = false;
 init();
+
 function init(){
     username.autofocus;
+
+
 }
+
+
+
 function checkInput(){
     var usernameValue = username.value.trim();
     var emailValue = email.value.trim();
@@ -22,6 +31,7 @@ function checkInput(){
 
     if(usernameValue === '') {
         setErrorFor(username, 'Username cannot be blank');
+        userNameValid =false;
     } else {
         setSuccessFor(username);
         userNameValid =true
@@ -29,6 +39,7 @@ function checkInput(){
 
     if(addressValue === '') {
         setErrorFor(address, 'address cannot be blank');
+        addressVaild =false;
     } else {
         setSuccessFor(address);
         addressVaild =true
@@ -36,8 +47,10 @@ function checkInput(){
 
     if(emailValue === '') {
         setErrorFor(email, 'Email cannot be blank');
+        emailValid=false;
     } else if(!isEmail(emailValue)){
         setErrorFor(email, 'not a valid email');
+        emailValid=false;
     }else
     {
         setSuccessFor(email);
@@ -46,6 +59,7 @@ function checkInput(){
 
     if(passwordValue === '') {
         setErrorFor(password, 'password cannot be blank');
+        passwordValid=false;
     } else {
         setSuccessFor(password);
         passwordValid=true;
@@ -76,12 +90,23 @@ var changeIcon =`<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-
 var submit = document.getElementById('submit');
 
 submit.addEventListener('click',function (event){
+    if(visibleTable.rows.length > 1){
+        tableFooter.style.visibility = 'hidden';
+    }else{
+
+    }
     checkInput();
+    console.log(visibleTable.rows.length);
     event.preventDefault();
     if(userNameValid && emailValid && addressVaild && passwordValid){
        addMembers();
     }else {
-        alert(3232);
+        Swal.fire({
+            title: 'Error!',
+            text: 'Owa thiyenne enter karanna buruwo',
+            icon: 'error',
+            confirmButtonText: 'Cool'
+        })
     }
 });
 var selectedRow = null
@@ -122,32 +147,58 @@ console.log(body.children)
 function updateRecord(formData) {
     if(selectedRow != null){
         selectedRow.children[1].innerText = data().fullName;
-        selectedRow.children[2].innerText = data().email;
-        selectedRow.children[3].innerText = data().address;
+        selectedRow.children[3].innerText = data().email;
+        selectedRow.children[2].innerText = data().address;
     }
 
 }
 
-
+function serialNo(srNo){
+    if(srNo < 10){
+        return srNo = 'C00' + srNo;
+    }else if(srNo < 100){
+        return srNo = 'C0' + srNo;
+    }else{
+        return srNo = 'C' +srNo;
+    }
+}
 document.querySelector('.colum-1').addEventListener('click',function (event){
     console.log(event.target);
     if(event.target.classList.contains('delete')) {
-        var row = event.target.parentElement.parentElement.parentElement.parentElement.parentElement;
-        document.getElementById('table').deleteRow(row.rowIndex);
+        Swal.fire({
+            title: 'Hodata hithala karapan hode?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var row = event.target.parentElement.parentElement.parentElement.parentElement.parentElement;
+                document.getElementById('table').deleteRow(row.rowIndex);
+                Swal.fire(
+                    'Deleted!',
+                    'Obata sathutuida dan',
+                    'success'
+                )
+            }
+        })
+
     }else if(event.target.classList.contains('edit')){
         selectedRow = event.target.parentElement.parentElement.parentElement.parentElement.parentElement;
         console.log(selectedRow.children[1].innerText);
       /*  console.log(selectedRow.cells[1])*/
         document.getElementById("name").value = selectedRow.children[1].innerText;
-        document.getElementById("email").value = selectedRow.children[2].innerText;
-        document.getElementById("address").value = selectedRow.children[3].innerText;
+        document.getElementById("email").value = selectedRow.children[3].innerText;
+        document.getElementById("address").value = selectedRow.children[2].innerText;
     }
 });
 
 function update(){
         document.getElementById("name").value = selectedRow.rowIndex.cells[1].innerHTML;
-       document.getElementById("email").value = selectedRow.rowIndex.cells[2].innerHTML;
-       document.getElementById("address").value = selectedRow.rowIndex[3].innerHTML;
+       document.getElementById("email").value = selectedRow.rowIndex.cells[3].innerHTML;
+       document.getElementById("address").value = selectedRow.rowIndex[2].innerHTML;
 }
 
 function data(){
@@ -168,12 +219,19 @@ function addMembers(){
         cell4 = newRow.insertCell(3);
         cell5 = newRow.insertCell(4);
 
-        cell1.innerHTML = srNo;
+        cell1.innerHTML = serialNo(srNo);
         cell2.innerHTML = data().fullName;
         cell3.innerHTML = data().address;
         cell4.innerHTML = data().email;
         cell5.innerHTML = html;
         resetForm();
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Yanthan Athi',
+            showConfirmButton: false,
+            timer: 1500
+        })
     }else {
         updateRecord(data())
         resetForm();
