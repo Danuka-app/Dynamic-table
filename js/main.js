@@ -89,18 +89,14 @@ var changeIcon =`<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-
 
 var submit = document.getElementById('submit');
 
-submit.addEventListener('click',function (event){
-    if(visibleTable.rows.length > 1){
-        tableFooter.style.visibility = 'hidden';
-    }else{
-
-    }
+submit.addEventListener("click",function (event){
     checkInput();
     console.log(visibleTable.rows.length);
     event.preventDefault();
     if(userNameValid && emailValid && addressVaild && passwordValid){
-       addMembers();
+       addMembers(event);
     }else {
+        event.preventDefault();
         Swal.fire({
             title: 'Error!',
             text: 'Owa thiyenne enter karanna buruwo',
@@ -108,7 +104,7 @@ submit.addEventListener('click',function (event){
             confirmButtonText: 'Cool'
         })
     }
-});
+},false);
 var selectedRow = null
 
 var srNo =0;
@@ -209,7 +205,8 @@ function data(){
     formData.address = document.getElementById('address').value;
     return formData;
 }
-function addMembers(){
+function addMembers(event){
+
     if(selectedRow ==null){
         var table = document.querySelector('table');
         var newRow = table.insertRow(table.length);
@@ -230,7 +227,9 @@ function addMembers(){
             icon: 'success',
             title: 'Yanthan Athi',
             showConfirmButton: false,
-            timer: 1500
+            timer: 1000
+        },function (event){
+            event.preventDefault();
         })
     }else {
         updateRecord(data())
@@ -240,7 +239,7 @@ function addMembers(){
     srNo++;
 }
 
-function resetForm(){
+function resetForm(event){
     document.getElementById("name").value = "";
     document.getElementById("email").value = "";
     document.getElementById("address").value = "";
